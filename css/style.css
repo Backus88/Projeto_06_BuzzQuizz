@@ -1,11 +1,51 @@
 /* GLOBAL */
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, span, pre, strong, a{
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, span, pre, strong, a, input{
 	font-family: 'Roboto', sans-serif;
 }
 body{
     background: #E5E5E5;
 }
-
+div, header, section, input{
+    box-sizing: border-box;
+}
+h2{
+    font-weight: 700;
+    font-size: 20px;
+    color: #000;
+}
+input[type=text] {
+    padding: 10px;
+    padding-left: 23px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    background: #FFFFFF;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 19px;
+    font-weight: bold;
+}
+input[type=text]::placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: #BABABA;
+}
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    background: #EC362D;
+    border-radius: 15px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFF5F4;
+    padding: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border: none;
+    cursor: pointer;
+}
 
 /* HEADER */
 header{
@@ -16,15 +56,36 @@ header{
 	position: fixed;
 	top: 0;
 	left: 0;
-	display: flex;
-	align-items: center;
-    justify-content: center;
 	z-index: 10;
-	box-sizing: border-box;
 	color: #fff;
 }
 header .logo{
     font-weight: 700;
     font-size: 37px;
     line-height: 43px;
+}
+/* CRIAÇÃO DE QUIZZ */
+.creation{
+    flex-direction: column;
+}
+.creation-head{
+    margin-top: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.creation-body{
+    background-color: #fff;
+    padding: 20px;
+    width: 600px;
+}
+.creation-footer{
+    margin-top: 29px;
+}
+/* MOBILE */
+@media (max-width: 614px)
+{
+    .creation-body{
+        width: 100%;
+    }
+
 }
