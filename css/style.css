@@ -81,11 +81,26 @@ header .logo{
 .creation-footer{
     margin-top: 29px;
 }
+
+/* CRIAÇÃO DOS NÍVEIS */
+
+.hidden-menu{
+    display: flex;  
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.display-none{
+    display: none;
+}
 /* MOBILE */
 @media (max-width: 614px)
 {
     .creation-body{
         width: 100%;
     }
-
+    .input-descricao{
+        min-height: 177px;
+    }
 }
