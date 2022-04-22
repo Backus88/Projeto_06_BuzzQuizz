@@ -1,3 +1,5 @@
+const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
+
 const perguntasArray = [];
 const infoObjeto ={};
 
@@ -79,8 +81,98 @@ const verificaUrl = urlValid => {
   }
 }
 const verificaTamanhoDescricao = descricao => descricao.length >= 30;
+const guardaQuizz = resposta =>{
+  localStorage.setItem("id:", resposta.data.id);
+}
+const erroCriacao = erro =>{
+  console.log(erro.response.status);
+}
+
+//objeto apenas para testar o post;
+const arrayQuestions = [
+  {
+    title: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+    color: "#000000",
+    answers: [
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: true
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      }
+    ]
+  },
+  {
+    title: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+    color: "#000000",
+    answers: [
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: true
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      }
+    ]
+  },
+  {
+    title: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+    color: "#000000",
+    answers: [
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: true
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      },
+      {
+        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
+        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
+        isCorrectAnswer: false
+      }
+    ]
+  }
+]
+
 //função quevai no onclick e passa para a fase seguinte caso os campos sejam validados
 function validaNivel() {
+  let quizzFinal = {};
   const arrayNiveis =[];
   const tituloNode = document.querySelectorAll("input[name= nivel-titulo]");
   const acertoNode = document.querySelectorAll("input[name= nivel-acertos]");
@@ -95,10 +187,10 @@ function validaNivel() {
     descricao = descricaoNode[index].value;
     if (verificaTamanhoTitulo(titulo) && verificaPorcentagem(acerto) && verificaUrl(nivelUrl) && verificaTamanhoDescricao(descricao)) {
       arrayNiveis.push({
-        titulo: titulo,
-        acerto: acerto,
-        urll: nivelUrl,
-        descricao: descricao
+        title: titulo,
+        image: nivelUrl,
+        text: descricao,
+        minValue: acerto
       })
     } 
   }
@@ -110,9 +202,24 @@ function validaNivel() {
 
   }
   if(arrayNiveis.length === tituloNode.length){
-    return console.log(arrayNiveis);
+    quizzFinal = {
+      title: 'Titulo do quiz',
+      image: 'https://http.cat/411.jpg',
+      questions: arrayQuestions,
+      levels: arrayNiveis
+    }
+    console.log(quizzFinal);
+    let promise = axios.post(linksQuizz,quizzFinal);
+    promise.then()
+
+  }else{
+    return alert("dados inválidos"); 
   }
-  return alert("dados inválidos"); 
+  
+}
+
+function criarQuizz(){
+
 }
 
 function voltaHome(){
