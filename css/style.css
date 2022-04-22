@@ -74,12 +74,50 @@ header .logo{
     padding-bottom: 30px;
 }
 .creation-body{
-    background-color: #fff;
     padding: 20px;
     width: 600px;
 }
 .creation-footer{
     margin-top: 29px;
+}
+
+/* CRIAÇÃO DOS NÍVEIS */
+
+.hidden-menu{
+    display: flex;  
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.nivel-body{
+    background-color: #fff;
+    margin-bottom: 27px;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Sucesso do Quiz */
+
+.step-4 img {
+    width: 500px;
+    height: 266px;
+    margin-left: 32px;
+}
+.botoes-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-borderless{
+    margin-top: 9px;
+    background-color:#E5E5E5 ;
+    color: #818181;
+}
+
+.display-none{
+    display: none;
 }
 /* MOBILE */
 @media (max-width: 614px)
@@ -87,5 +125,7 @@ header .logo{
     .creation-body{
         width: 100%;
     }
-
+    .input-descricao{
+        min-height: 177px;
+    }
 }
