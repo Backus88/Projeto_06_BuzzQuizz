@@ -38,28 +38,36 @@
             </div>
         </section>
 
-        <section class="step-3">
+        <section class="step-3 display-none" >
             <div class="creation-head flex-center">
                 <h2>Agora, decida os níveis!!!</h2>
             </div>
             <div class="creation-body">
-                <div class="nivel-body">
-                    <div role="button" class="hidden-menu" onclick="alternaNiveis(this)">
-                        <h2>Nível 1</h2>
-                        <img class ="img-editar" src="imgs/editIcon.svg">
-                    </div>
-                    <div class="hidden-body display-none">
-                        <input type="text" placeholder="Título do nível" name="nivel-titulo"></input>
-                        <input type="text" placeholder="% de acerto mínima" name="nivel-acertos"></input>
-                        <input type="text" placeholder="URL da imagem do nível" name="nivel-url"></input>
-                        <input type="text" placeholder="Descrição do nível" name="nivel-descricao" class="input-descricao"></input>
-                    </div>
-                </div>
             </div>
             <div class="creation-footer flex-center">
                 <button class="btn" onclick="validaNivel()">
                     Finalizar Quizz
                 </button>
+            </div>
+        </section>
+
+        <section class="step-4">
+            <div class="creation-head flex-center">
+                <h2>Seu quizz está pronto!</h2>
+            </div>
+            <div class="creation-body">
+                <img src="imgs/finalizaquiz.png" alt="">
+            </div>
+            <div class="creation-footer flex-center">
+                <div class="botoes-column">
+                    <button class="btn">
+                        Acessar Quiz
+                    </button>
+                    <button class="btn btn-borderless">
+                        Volta pra home
+                    </button>
+                </div>
+                
             </div>
         </section>
 

@@ -1,6 +1,7 @@
+const perguntasArray = [];
+const infoObjeto ={};
+
 // função alterna estado do nível
-
-
 function alternaNiveis(elemento) {
   let imgDisplays;
   let imgElemento;
@@ -112,4 +113,12 @@ function validaNivel() {
     return console.log(arrayNiveis);
   }
   return alert("dados inválidos"); 
+}
+
+function voltaHome(){
+  console.log('volta para home');
+}
+
+function mostraQuizz(){
+  console.log('mostra quizz');
 }
