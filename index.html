@@ -43,19 +43,21 @@
                 <h2>Agora, decida os níveis!!!</h2>
             </div>
             <div class="creation-body">
-                <div role="button" class="hidden-menu" onclick="alternaNiveis(this)">
-                    <h2>Nível 1</h2>
-                    <img class ="img-editar" src="imgs/editIcon.svg">
+                <div class="nivel-body">
+                    <div role="button" class="hidden-menu" onclick="alternaNiveis(this)">
+                        <h2>Nível 1</h2>
+                        <img class ="img-editar" src="imgs/editIcon.svg">
+                    </div>
+                    <div class="hidden-body display-none">
+                        <input type="text" placeholder="Título do nível" name="nivel-titulo"></input>
+                        <input type="text" placeholder="% de acerto mínima" name="nivel-acertos"></input>
+                        <input type="text" placeholder="URL da imagem do nível" name="nivel-url"></input>
+                        <input type="text" placeholder="Descrição do nível" name="nivel-descricao" class="input-descricao"></input>
+                    </div>
                 </div>
-                <div class="hidden-body display-none">
-                    <input type="text" placeholder="Título do nível" name="nível-titulo"></input>
-                    <input type="text" placeholder="% de acerto mínima" name="nível-acertos"></input>
-                    <input type="text" placeholder="URL da imagem do nível" name="nível-url"></input>
-                    <input type="text" placeholder="Descrição do nível" name="nível-descrição" class="input-descricao"></input>
-                </div>   
             </div>
             <div class="creation-footer flex-center">
-                <button class="btn">
+                <button class="btn" onclick="validaNivel()">
                     Finalizar Quizz
                 </button>
             </div>
