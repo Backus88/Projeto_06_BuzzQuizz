@@ -61,17 +61,15 @@ function alternaPerguntas(elemento){
 
     elemento = elemento.parentNode;
 
-
     let selecionado = document.querySelector(".perguntas-body.active");
 
     if (selecionado == null) {
   
       elemento.classList.add("active");
-  
+      
     }else{
       
-      selecionado.classList.remove("active");
-      elemento.classList.add("active"); 	
+      elemento.classList.toggle("active"); 	
     }
 }
 function validaPerguntas(){

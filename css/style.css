@@ -93,7 +93,8 @@ header .logo{
     display: none;
 }
 .perguntas-body.active .inputs{
-    display: block;
+     display: block;*
+
 }
 
 /* CRIAÇÃO DOS NÍVEIS */
