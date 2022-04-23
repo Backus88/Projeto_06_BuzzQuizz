@@ -13,6 +13,10 @@ h2{
     font-size: 20px;
     color: #000;
 }
+hr{
+    border: none;
+    margin-block-start: 1em;
+}
 input[type=text] {
     padding: 10px;
     padding-left: 23px;
@@ -77,8 +81,19 @@ header .logo{
     padding: 20px;
     width: 600px;
 }
+
 .creation-footer{
     margin-top: 29px;
+}
+.step-1 .creation-body{
+    background-color: #fff;
+}
+/* PERGUNTAS */
+.perguntas-body .inputs{
+    display: none;
+}
+.perguntas-body.active .inputs{
+    display: block;
 }
 
 /* CRIAÇÃO DOS NÍVEIS */
@@ -88,10 +103,11 @@ header .logo{
     flex-direction: row;
     justify-content: space-between;
     padding: 20px;
+    padding-left: 0px;
     cursor: pointer;
 }
 
-.nivel-body{
+.nivel-body, .perguntas-body{
     background-color: #fff;
     margin-bottom: 27px;
     padding: 10px;

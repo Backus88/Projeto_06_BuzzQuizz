@@ -21,27 +21,37 @@
 
     <section class="creation flex-center">
 
-        <section class="step-1 display-none">
+        <section class="step-1 ">
             <div class="creation-head flex-center">
                 <h2>Comece pelo começo</h2>
             </div>
             <div class="creation-body">
-                <input type="text" placeholder="Título do seu quizz" name="quizz-titulo"></input>
-                <input type="text" placeholder="URL da imagem do seu quizz" name="quizz-url"></input>
-                <input type="text" placeholder="Quantidade de perguntas do quizz" name="quizz-qtd-perguntas"></input>
-                <input type="text" placeholder="Quantidade de níveis do quizz" name="quizz-qtd-niveis"></input>
+                <input type="text" placeholder="Título do seu quizz" name="quizz-titulo" required></input>
+                <input type="text" placeholder="URL da imagem do seu quizz" name="quizz-img" required></input>
+                <input type="text" placeholder="Quantidade de perguntas do quizz" name="quizz-qtd-perguntas" required></input>
+                <input type="text" placeholder="Quantidade de níveis do quizz" name="quizz-qtd-niveis" required></input>
             </div>
             <div class="creation-footer flex-center">
-                <button class="btn">
+                <button class="btn" onclick="validaInfoBasicas()">
                     Prosseguir pra criar perguntas
                 </button>
             </div>
         </section>
-        <section class="step-2">
-            
+        
+        <section class="step-2 display-none">
+            <div class="creation-head flex-center">
+                <h2>Crie suas perguntas</h2>
+            </div>
+            <div class="creation-body">
+            </div>
+            <div class="creation-footer flex-center">
+                <button class="btn" onclick="validaPerguntas()">
+                    Prosseguir pra criar níveis
+                </button>
+            </div>
         </section>
 
-        <section class="step-3 " >
+        <section class="step-3 display-none" >
             <div class="creation-head flex-center">
                 <h2>Agora, decida os níveis!!!</h2>
             </div>
