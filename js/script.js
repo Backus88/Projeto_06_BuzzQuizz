@@ -1,14 +1,11 @@
 const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
-//usar o id = 84 para testar
+//usar o id = 84 para testar//
 
 const perguntasArray = [];
 const infoObjeto ={};
 let infoBasicasQUizz={};
 
 function validaInfoBasicas() {
-    
-
-
     infoBasicasQUizz = {
         nome: document.getElementsByName('quizz-titulo')[0].value,
         img: document.getElementsByName('quizz-img')[0].value,
@@ -92,25 +89,16 @@ function alternaNiveis(elemento) {
   }
 
   if (imgElemento.classList.contains("display-none")) {
-    console.log('imgElemento:'+ imgElemento);
-    console.log('imgDisplay:'+ imgDisplays);
-    console.log('hiddenbody:'+ hiddenBody);
     imgElemento.classList.remove("display-none");
     imgElemento.parentElement.parentElement.querySelector(".hidden-body").classList.add("display-none");
     return;
   }
   if (imgDisplays === null) {
-    console.log('imgElemento:'+ imgElemento);
-    console.log('imgDisplay:'+ imgDisplays);
-    console.log('hiddenbody:'+ hiddenBody);
     imgElemento.classList.add("display-none");
     imgElemento.parentElement.parentElement.querySelector(".hidden-body").classList.remove("display-none")
     return;
   }
   if (imgDisplays.classList.contains("display-none") && imgElemento.classList.contains("display-none") === false) {
-    console.log('imgElemento:'+ imgElemento);
-    console.log('imgDisplay:'+ imgDisplays);
-    console.log('hiddenbody:'+ hiddenBody);
     imgDisplays.classList.remove("display-none");
     hiddenBody.classList.add("display-none");
     imgElemento.classList.add("display-none");
@@ -164,88 +152,6 @@ const guardaQuizz = resposta =>{
 const erroCriacao = erro =>{
   console.log(erro.response.status);
 }
-
-//objeto apenas para testar o post;
-const arrayQuestions = [
-  {
-    title: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-    color: "#000000",
-    answers: [
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: true
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      }
-    ]
-  },
-  {
-    title: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-    color: "#000000",
-    answers: [
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: true
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      }
-    ]
-  },
-  {
-    title: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-    color: "#000000",
-    answers: [
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: true
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      },
-      {
-        text: "awduhawiudhawiudhaiwudhiuawhdiuawhdiuahwdiuahwiduhaiwudhuiawd",
-        image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-        isCorrectAnswer: false
-      }
-    ]
-  }
-]
 
 //função quevai no onclick e passa para a fase seguinte caso os campos sejam validados
 function validaNivel() {
