@@ -1,7 +1,5 @@
 const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
-
-const perguntasArray = [];
-const infoObjeto ={};
+//usar o id = 84 para testar
 
 // função alterna estado do nível
 function alternaNiveis(elemento) {
@@ -82,7 +80,9 @@ const verificaUrl = urlValid => {
 }
 const verificaTamanhoDescricao = descricao => descricao.length >= 30;
 const guardaQuizz = resposta =>{
-  localStorage.setItem("id:", resposta.data.id);
+  localStorage.setItem(`id${localStorage.length+1}`, resposta.data.id);
+  document.querySelector(".step-3").classList.add("display-none");
+  document.querySelector(".step-4").classList.remove("display-none");
 }
 const erroCriacao = erro =>{
   console.log(erro.response.status);
@@ -210,16 +210,11 @@ function validaNivel() {
     }
     console.log(quizzFinal);
     let promise = axios.post(linksQuizz,quizzFinal);
-    promise.then()
-
+    promise.then(guardaQuizz);
   }else{
     return alert("dados inválidos"); 
   }
   
-}
-
-function criarQuizz(){
-
 }
 
 function voltaHome(){
