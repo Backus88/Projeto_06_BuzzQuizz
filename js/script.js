@@ -142,6 +142,8 @@ const verificaUrl = urlValid => {
   }
 }
 const verificaTamanhoDescricao = descricao => descricao.length >= 30;
+const verificaNiveis = niveis => niveis === '0';
+
 const guardaQuizz = resposta =>{
   localStorage.setItem(`id${localStorage.length+1}`, resposta.data.id);
   document.querySelector(".step-3").classList.add("display-none");
@@ -159,13 +161,18 @@ function validaNivel() {
   const acertoNode = document.querySelectorAll("input[name= nivel-acertos]");
   const nivelUrlNode = document.querySelectorAll("input[name= nivel-url]");
   const descricaoNode = document.querySelectorAll("input[name= nivel-descricao]");
-
+  let nivelzero = false;
   let titulo, acerto, nivelUrl, descricao;
   for (let index = 0; index < tituloNode.length; index++) {
     titulo = tituloNode[index].value;
     acerto = acertoNode[index].value;
     nivelUrl = nivelUrlNode[index].value;
     descricao = descricaoNode[index].value;
+    if(nivelzero === false){
+      nivelzero = verificaNiveis(acerto);
+      console.log(acerto);
+      console.log(nivelzero);
+    }
     if (verificaTamanhoTitulo(titulo) && verificaPorcentagem(acerto) && verificaUrl(nivelUrl) && verificaTamanhoDescricao(descricao)) {
       arrayNiveis.push({
         title: titulo,
@@ -182,7 +189,8 @@ function validaNivel() {
     descricaoNode[index].value = '';
 
   }
-  if(arrayNiveis.length === tituloNode.length){
+  console.log(nivelzero)
+  if(arrayNiveis.length === tituloNode.length && nivelzero){
     quizzFinal = {
       title: 'Titulo do quiz',
       image: 'https://http.cat/411.jpg',
