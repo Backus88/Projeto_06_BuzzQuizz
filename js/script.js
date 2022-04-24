@@ -1,8 +1,6 @@
 const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 //usar o id = 84 para testar//
 
-const perguntasArray = [];
-const infoObjeto ={};
 let infoBasicasQUizz={};
 
 function validaInfoBasicas() {
@@ -153,7 +151,7 @@ const erroCriacao = erro =>{
   console.log(erro.response.status);
 }
 
-//função quevai no onclick e passa para a fase seguinte caso os campos sejam validados
+//função que vai no onclick e passa para a fase seguinte caso os campos sejam validados
 function validaNivel() {
   let quizzFinal = {};
   const arrayNiveis =[];
@@ -200,6 +198,7 @@ function validaNivel() {
   
 }
 
+// funções da tela de finalizar a criação do quizz
 function voltaHome(){
   console.log('volta para home');
 }
@@ -207,3 +206,79 @@ function voltaHome(){
 function mostraQuizz(){
   console.log('mostra quizz');
 }
+
+// muda para a tela criarquizz
+function vaiCriarQuizz(){
+  document.querySelector(".tela1").classList.add("display-none");
+  document.querySelector(".step-1").classList.remove("display-none");
+}
+
+// pega os quizzes
+function pegaQuizzes(){
+  promise = axios.get(linksQuizz);
+  promise.then(renderizaQuizzes);
+}
+
+//renderiza a lista de quizzes considerando os quizzes do usuario
+function renderizaQuizzes(resposta){
+const quizzesUsuario = [];
+const quizzesOutros = resposta.data;
+  let imgQuizz;
+  for (let x = 0; x < localStorage.length; x++) {
+    for (let y = 0; y< resposta.data; y++) {
+      console.log(Number(localStorage["id"+x]));
+      console.log(resposta[y].data.id)
+      if (Number(localStorage["id"+x]) === resposta[y].data.id){
+        quizzesUsuario.push(resposta.data[y]);
+        quizzesOutros.splice(y,1);
+      } 
+    }
+    
+  }
+  let usuarioElemento = document.querySelector(".usuario-quizz .quizzes-lista");
+  let outroElemento = document.querySelector(".outros-quizz .quizzes-lista");
+  let noQuizzElemento = document.querySelector(".div-criar-quizz")
+  let tituloOutrosElemento = document.querySelector("seus-quizzes-titulo");
+  if(quizzesUsuario.length === 0){
+    tituloOutrosElemento = ``;
+    noQuizzElemento.innerHTML = ``;
+    noQuizzElemento.innerHTML = `
+      <h3>Você não criou nenhum quizz ainda :(</h3>
+      <button onclick = "vaiCriarQuizz()">
+          Criar Quizz
+      </button>
+    `;
+  }else{
+    usuarioElemento.innerHTML = ``;
+    tituloOutrosElemento = `
+        <h2>Seus Quizzes</h2>
+        <ion-icon role="button" name="add-circle-sharp" onclick = "vaiCriarQuizz()"></ion-icon>
+    `;
+    for (let index = 0; index < quizzesUsuario.length; index++) {
+      imgQuizz = quizzesUsuario[index].image;
+      usuarioElemento.innerHTML +=`
+      <div class="quizz-card" id ="${index}" role = "button">
+          <img src=${imgQuizz}>
+          <div class="degrade">   
+          </div>
+      </div>
+    `;
+    }
+  }
+  if (outroElemento.length != 0){
+    outroElemento.innerHTML = ``;
+    for (let index = 0; index < quizzesOutros.length; index++) {
+      imgQuizz = quizzesOutros[index].image; 
+      outroElemento.innerHTML +=`
+      <div class="quizz-card" id ="${index}" role = "button">
+          <img src=${imgQuizz}>
+          <div class="degrade">   
+          </div>
+      </div>
+    `;
+    }
+  }
+}
+
+//inicializa o site
+pegaQuizzes();
