@@ -229,6 +229,7 @@ function validaNivel() {
   const acertoNode = document.querySelectorAll("input[name= nivel-acertos]");
   const nivelUrlNode = document.querySelectorAll("input[name= nivel-url]");
   const descricaoNode = document.querySelectorAll("input[name= nivel-descricao]");
+  const imagemFim = document.querySelector(".step-4 .creation-body");
   let nivelzero = false;
   let titulo, acerto, nivelUrl, descricao;
   for (let index = 0; index < tituloNode.length; index++) {
@@ -271,7 +272,15 @@ function validaNivel() {
   }else{
     return alert("Dados inválidos"); 
   }
-  
+  imagemFim.innerHTML =``;
+  imagemFim.innerHTML = `
+    <div class ="imgFim">
+        <img src=${infoBasicasQuizz.img}>
+        <div class="degrade">
+             <p>${infoBasicasQuizz.nome}</p>   
+        </div>
+    </div>  
+  `;
 }
 
 // funções da tela de finalizar a criação do quizz
