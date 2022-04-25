@@ -289,7 +289,12 @@ function voltaHome(){
   window.location.reload();
 }
 
-function mostraQuizz(){
+function mostraQuizz(id){
+
+  document.querySelector(".tela1").classList.add("display-none");
+  document.querySelector(".quizz-game").classList.remove("display-none");
+
+  //alert(id);
   console.log('mostra quizz');
 }
 
@@ -352,7 +357,7 @@ function renderizaQuizzes(resposta){
       imgQuizz = quizzesUsuario[index].image;
       tituloQuizz = quizzesUsuario[index].title;
       usuarioElemento.innerHTML +=`
-      <div class="quizz-card" id ="${index}" role = "button">
+      <div class="quizz-card" id ="${index}" role = "button" onclick="mostraQuizz(${quizzesUsuario[index].id})">
           <img src=${imgQuizz}>
           <div class="degrade">
             <p>${tituloQuizz}</p>   
@@ -367,7 +372,7 @@ function renderizaQuizzes(resposta){
       imgQuizz = quizzesOutros[index].image; 
       tituloQuizz = quizzesOutros[index].title;
       outroElemento.innerHTML +=`
-      <div class="quizz-card" id ="${index}" role = "button">
+      <div class="quizz-card" id ="${index}" role = "button" onclick="mostraQuizz(${quizzesOutros[index].id})">
           <img src=${imgQuizz}>
           <div class="degrade"> 
             <p>${tituloQuizz}</p>  
