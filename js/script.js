@@ -1,25 +1,33 @@
 const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 //usar o id = 84 para testar//
 
-let infoBasicasQUizz={};
+let infoBasicasQuizz={};
+let arrayQuestions =[];
 
 function validaInfoBasicas() {
-    infoBasicasQUizz = {
-        nome: document.getElementsByName('quizz-titulo')[0].value,
-        img: document.getElementsByName('quizz-img')[0].value,
-        qtdPerguntas: document.getElementsByName('quizz-qtd-perguntas')[0].value,
-        qtdNiveis: document.getElementsByName('quizz-qtd-niveis')[0].value
+    infoBasicasQuizz = {
+      nome: document.getElementsByName('quizz-titulo')[0].value,
+      img: document.getElementsByName('quizz-img')[0].value,
+      qtdPerguntas: document.getElementsByName('quizz-qtd-perguntas')[0].value,
+      qtdNiveis: document.getElementsByName('quizz-qtd-niveis')[0].value
     };
 
-    document.querySelector(".step-1").classList.add("display-none");
-    renderizaPerguntas();
+    if (verificaTamanhoTitulo(infoBasicasQuizz.nome) && verificaUrl(infoBasicasQuizz.img) && verificaTamanhoNum(infoBasicasQuizz.qtdPerguntas) && verificaTamanhoNum(infoBasicasQuizz.qtdNiveis) ) {
+      
+      document.querySelector(".step-1").classList.add("display-none");
+      renderizaPerguntas();
+    }else{
+      infoBasicasQuizz={};
+      return alert("dados inválidos");
+    }
+
 }
 
 function renderizaPerguntas() {
 
     const corpoNivel = document.querySelector(".step-2 .creation-body");
     corpoNivel.innerHTML = ``;
-    for (let index = 0; index < infoBasicasQUizz.qtdPerguntas; index++) {
+    for (let index = 0; index < infoBasicasQuizz.qtdPerguntas; index++) {
       corpoNivel.innerHTML += `
         
         <div class="perguntas-body">
@@ -28,22 +36,22 @@ function renderizaPerguntas() {
                 <img class ="img-editar" src="imgs/editIcon.svg">
             </div>
             <div class="inputs">
-                <input type="text" placeholder="Texto da pergunta" name="pergunta-${index}-texto"></input>
-                <input type="text" placeholder="Cor de fundo da pergunta" name="pergunta-${index}-"></input>
+                <input type="text" placeholder="Texto da pergunta" name="pergunta-texto"></input>
+                <input type="text" placeholder="Cor de fundo da pergunta" name="pergunta-cor"></input>
                 <hr>
                 <h2>Resposta correta</h2>
-                <input type="text" placeholder="Resposta correta" name="pergunta-${index}-resposta-correta"></input>
-                <input type="text" placeholder="URL da imagem" name="pergunta-${index}-url-imagem"></input>
+                <input type="text" placeholder="Resposta correta" name="pergunta-resposta-${index}"></input>
+                <input type="text" placeholder="URL da imagem" name="pergunta-url-img-${index}"></input>
                 <hr>
                 <h2>Respostas incorretas</h2>
-                <input type="text" placeholder="Resposta incorreta 1" name="pergunta-${index}-resposta-incorreta-1"></input>
-                <input type="text" placeholder="URL da imagem 1" name="pergunta-${index}-url-imagem-incorreta-1"></input>
+                <input type="text" placeholder="Resposta incorreta 1" name="pergunta-resposta-${index}"></input>
+                <input type="text" placeholder="URL da imagem 1" name="pergunta-url-img-${index}"></input>
                 <hr>
-                <input type="text" placeholder="Resposta incorreta 1" name="pergunta-${index}-resposta-incorreta-2"></input>
-                <input type="text" placeholder="URL da imagem 1" name="pergunta-${index}-url-imagem-incorreta-2"></input>
+                <input type="text" placeholder="Resposta incorreta 2" name="pergunta-resposta-${index}"></input>
+                <input type="text" placeholder="URL da imagem 2" name="pergunta-url-img-${index}"></input>
                 <hr>
-                <input type="text" placeholder="Resposta incorreta 1" name="pergunta-${index}-resposta-incorreta-3"></input>
-                <input type="text" placeholder="URL da imagem 1" name="pergunta-${index}-url-imagem-incorreta-3"></input>
+                <input type="text" placeholder="Resposta incorreta 3" name="pergunta-resposta-${index}"></input>
+                <input type="text" placeholder="URL da imagem 3" name="pergunta-url-img-${index}"></input>
             </div>
         </div>
         `;
@@ -69,10 +77,56 @@ function alternaPerguntas(elemento){
     }
 }
 function validaPerguntas(){
-    
-    document.querySelector(".step-2").classList.add("display-none");
+  
+  const perguntaTextoNode = document.querySelectorAll("input[name=pergunta-texto]");
+  const perguntaCorNode = document.querySelectorAll("input[name=pergunta-cor]");
 
-    renderizaNiveis();
+
+  let questions = [];
+
+  for(let i = 0; i < infoBasicasQuizz.qtdPerguntas; i++){
+
+    const perguntaRespostaNode = document.querySelectorAll(`input[name=pergunta-resposta-${i}]`);
+    const perguntaRespostaImgNode = document.querySelectorAll(`input[name=pergunta-url-img-${i}]`);
+
+    
+    let title = perguntaTextoNode[i].value;
+    let color = perguntaCorNode[i].value;
+
+    if (!verificaTamanhoTitulo(title) && !verificaCor(color)  ) {
+      return alert("Dados inválidos! Cheque os títulos das perguntas e a cor."); 
+    }
+
+    let answers = [];
+    
+    for(let j = 0; j < perguntaRespostaNode.length; j++){
+
+
+      if (verificaTamanhoTitulo(perguntaRespostaNode[j].value) && verificaUrl(perguntaRespostaImgNode[j].value) ) {
+        
+        answers.push({
+          text: perguntaRespostaNode[j].value,
+          image: perguntaRespostaImgNode[j].value,
+          isCorrectAnswer: false
+        })
+      }else{
+        return alert("Dados inválidos! Cheque os títulos das respostas e as URL's."); 
+      }
+    }
+    answers[0].isCorrectAnswer = true;
+    
+    questions.push({
+      title: title,
+      color: color,
+      answers: answers
+    })
+  }
+  
+
+  arrayQuestions = questions;
+
+  document.querySelector(".step-2").classList.add("display-none");
+  renderizaNiveis();
 }
 
 // função alterna estado do nível
@@ -109,7 +163,7 @@ function renderizaNiveis() {
  
   const corpoNivel = document.querySelector(".step-3 .creation-body");
   corpoNivel.innerHTML = ``;
-  for (let index = 0; index < infoBasicasQUizz.qtdNiveis; index++) {
+  for (let index = 0; index < infoBasicasQuizz.qtdNiveis; index++) {
     corpoNivel.innerHTML += `
     <div class="nivel-body">
         <div role="button" class="hidden-menu" onclick="alternaNiveis(this)">
@@ -143,7 +197,15 @@ const verificaUrl = urlValid => {
 }
 const verificaTamanhoDescricao = descricao => descricao.length >= 30;
 const verificaNiveis = niveis => niveis === '0';
-
+const verificaTamanhoNum = num => num >= 1;
+const verificaCor = cor => {
+  let regex = /^#([0-9a-f]{3}){1,2}$/i;
+  if (!regex.test(cor)) {
+    return false;
+  } else {
+    return true;
+  }
+}
 const guardaQuizz = resposta =>{
   localStorage.setItem(`id${localStorage.length+1}`, resposta.data.id);
   document.querySelector(".step-3").classList.add("display-none");
@@ -192,8 +254,8 @@ function validaNivel() {
   console.log(nivelzero)
   if(arrayNiveis.length === tituloNode.length && nivelzero){
     quizzFinal = {
-      title: 'Titulo do quiz',
-      image: 'https://http.cat/411.jpg',
+      title: infoBasicasQuizz.nome,
+      image: infoBasicasQuizz.img,
       questions: arrayQuestions,
       levels: arrayNiveis
     }
