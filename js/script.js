@@ -307,11 +307,15 @@ function renderizaQuizzes(resposta){
   const quizzesOutros = resposta.data;
   let imgQuizz;
   let tituloQuizz;
+  let idx;
   for (let x = 0; x < localStorage.length; x++) {
-    for (let y = 0; y< resposta.data; y++) {
-      console.log(Number(localStorage["id"+x]));
-      console.log(resposta[y].data.id)
-      if (Number(localStorage["id"+x]) === resposta[y].data.id){
+    for (let y = 0; y< resposta.data.length; y++) {
+      console.log("id"+ (x+1));
+      idx = `id${(x+1)}`;
+      console.log(idx);
+      console.log(Number(localStorage[String(idx)]));
+      console.log(Number(quizzesOutros[y].id));
+      if (Number(localStorage[String(idx)]) === Number(quizzesOutros[y].id)){
         quizzesUsuario.push(resposta.data[y]);
         quizzesOutros.splice(y,1);
       } 
@@ -320,20 +324,23 @@ function renderizaQuizzes(resposta){
   }
   let usuarioElemento = document.querySelector(".usuario-quizz .quizzes-lista");
   let outroElemento = document.querySelector(".outros-quizz .quizzes-lista");
-  let noQuizzElemento = document.querySelector(".div-criar-quizz")
-  let tituloOutrosElemento = document.querySelector("seus-quizzes-titulo");
+  let noQuizzElemento = document.querySelector(".criar-container")
+  let tituloOutrosElemento = document.querySelector(".seus-quizzes-titulo");
   if(quizzesUsuario.length === 0){
     tituloOutrosElemento = ``;
     noQuizzElemento.innerHTML = ``;
     noQuizzElemento.innerHTML = `
-      <h3>Você não criou nenhum quizz ainda :(</h3>
-      <button onclick = "vaiCriarQuizz()">
-          Criar Quizz
-      </button>
+        <div class="div-criar-quizz">
+            <h3>Você não criou nenhum quizz ainda :(</h3>
+            <button onclick = "vaiCriarQuizz()">
+              Criar Quizz
+            </button>
+        </div>
+      
     `;
   }else{
     usuarioElemento.innerHTML = ``;
-    tituloOutrosElemento = `
+    tituloOutrosElemento.innerHTML = `
         <h2>Seus Quizzes</h2>
         <ion-icon role="button" name="add-circle-sharp" onclick = "vaiCriarQuizz()"></ion-icon>
     `;
