@@ -277,6 +277,7 @@ function validaNivel() {
 // funções da tela de finalizar a criação do quizz
 function voltaHome(){
   console.log('volta para home');
+  window.location.reload();
 }
 
 function mostraQuizz(){
@@ -297,9 +298,10 @@ function pegaQuizzes(){
 
 //renderiza a lista de quizzes considerando os quizzes do usuario
 function renderizaQuizzes(resposta){
-const quizzesUsuario = [];
-const quizzesOutros = resposta.data;
+  const quizzesUsuario = [];
+  const quizzesOutros = resposta.data;
   let imgQuizz;
+  let tituloQuizz;
   for (let x = 0; x < localStorage.length; x++) {
     for (let y = 0; y< resposta.data; y++) {
       console.log(Number(localStorage["id"+x]));
@@ -332,10 +334,12 @@ const quizzesOutros = resposta.data;
     `;
     for (let index = 0; index < quizzesUsuario.length; index++) {
       imgQuizz = quizzesUsuario[index].image;
+      tituloQuizz = quizzesUsuario[index].title;
       usuarioElemento.innerHTML +=`
       <div class="quizz-card" id ="${index}" role = "button">
           <img src=${imgQuizz}>
-          <div class="degrade">   
+          <div class="degrade">
+            <p>${tituloQuizz}</p>   
           </div>
       </div>
     `;
@@ -345,10 +349,12 @@ const quizzesOutros = resposta.data;
     outroElemento.innerHTML = ``;
     for (let index = 0; index < quizzesOutros.length; index++) {
       imgQuizz = quizzesOutros[index].image; 
+      tituloQuizz = quizzesOutros[index].title;
       outroElemento.innerHTML +=`
       <div class="quizz-card" id ="${index}" role = "button">
           <img src=${imgQuizz}>
-          <div class="degrade">   
+          <div class="degrade"> 
+            <p>${tituloQuizz}</p>  
           </div>
       </div>
     `;
