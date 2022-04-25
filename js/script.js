@@ -282,13 +282,28 @@ function voltaHome(){
 
 function mostraQuizz(id){
 
+
+
+  promise = axios.get(linksQuizz +'/'+id );
+  promise.then(renderizaQuizz);
+}
+function renderizaQuizz(resposta){
+
+  let quizz = resposta.data;
+
+  
+  document.querySelector(".quizz-head").style.background = `url("${quizz.image}")`;
+  document.querySelector(".quizz-head h2").innerHTML = quizz.title;
+
+  for (let i = 0; i < quizz.questions.length; i++) {
+    
+
+  }
+
+
   document.querySelector(".tela1").classList.add("display-none");
   document.querySelector(".quizz-game").classList.remove("display-none");
-
-  //alert(id);
-  console.log('mostra quizz');
 }
-
 // muda para a tela criarquizz
 function vaiCriarQuizz(){
   document.querySelector(".tela1").classList.add("display-none");
@@ -324,7 +339,7 @@ function renderizaQuizzes(resposta){
   }
   let usuarioElemento = document.querySelector(".usuario-quizz .quizzes-lista");
   let outroElemento = document.querySelector(".outros-quizz .quizzes-lista");
-  let noQuizzElemento = document.querySelector(".criar-container")
+  let noQuizzElemento = document.querySelector(".criar-container");
   let tituloOutrosElemento = document.querySelector(".seus-quizzes-titulo");
   if(quizzesUsuario.length === 0){
     tituloOutrosElemento = ``;

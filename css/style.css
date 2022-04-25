@@ -264,6 +264,30 @@ header .logo{
 .display-none{
     display: none;
 }
+/* TELA DE QUIZZ */
+.quizz-game .quizz-head{
+    padding: 87px 33px;
+    margin-top: 69px;
+    width: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.quizz-game .quizz-head .mask{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    opacity: 0.6;
+}
+.quizz-game .quizz-head h2{
+    color: #fff;
+    font-weight: 400;
+    font-size: 39px;
+    line-height: 46px;
+    z-index: 1;
+}
 /* MOBILE */
 @media (max-width: 614px)
 {
@@ -272,5 +296,12 @@ header .logo{
     }
     .input-descricao{
         min-height: 177px;
+    }
+    .quizz-game .quizz-head {
+        padding: 44px 33px;
+    }
+    .quizz-game .quizz-head h2{
+        font-size: 19px;
+        line-height: 22px;
     }
 }
