@@ -12,7 +12,7 @@ function validaInfoBasicas() {
       qtdNiveis: document.getElementsByName('quizz-qtd-niveis')[0].value
     };
 
-    if (verificaTamanhoTitulo(infoBasicasQuizz.nome) && verificaUrl(infoBasicasQuizz.img) && verificaTamanhoNum(infoBasicasQuizz.qtdPerguntas) && verificaTamanhoNum(infoBasicasQuizz.qtdNiveis) ) {
+    if (verificaTamanhoTituloQuizz(infoBasicasQuizz.nome) && verificaUrl(infoBasicasQuizz.img) && verificaQtdPerguntas(infoBasicasQuizz.qtdPerguntas) && verificaQtdNiveis(infoBasicasQuizz.qtdNiveis) ) {
       
       document.querySelector(".step-1").classList.add("display-none");
       renderizaPerguntas();
@@ -102,7 +102,7 @@ function validaPerguntas(){
     for(let j = 0; j < perguntaRespostaNode.length; j++){
 
 
-      if (verificaTamanhoTitulo(perguntaRespostaNode[j].value) && verificaUrl(perguntaRespostaImgNode[j].value) ) {
+      if (verificaTamanhoRespostasQuizz(perguntaRespostaNode[0].value) && verificaUrl(perguntaRespostaImgNode[0].value) && verificaTamanhoRespostasQuizz(perguntaRespostaNode[1].value) && verificaUrl(perguntaRespostaImgNode[1].value) ) {
         
         answers.push({
           text: perguntaRespostaNode[j].value,
@@ -198,6 +198,9 @@ const verificaUrl = urlValid => {
 const verificaTamanhoDescricao = descricao => descricao.length >= 30;
 const verificaNiveis = niveis => niveis === '0';
 const verificaTamanhoNum = num => num >= 1;
+const verificaQtdPerguntas = num => num >= 3;
+const verificaQtdNiveis = num => num >= 2;
+
 const verificaCor = cor => {
   let regex = /^#([0-9a-f]{3}){1,2}$/i;
   if (!regex.test(cor)) {
@@ -206,6 +209,9 @@ const verificaCor = cor => {
     return true;
   }
 }
+const verificaTamanhoTituloQuizz = titulo => titulo.length >= 20 && titulo.length <= 65;
+const verificaTamanhoPerguntasQuizz = titulo => titulo.length >= 20;
+const verificaTamanhoRespostasQuizz = titulo => titulo.length >= 1;
 const guardaQuizz = resposta =>{
   localStorage.setItem(`id${localStorage.length+1}`, resposta.data.id);
   document.querySelector(".step-3").classList.add("display-none");
@@ -263,7 +269,7 @@ function validaNivel() {
     let promise = axios.post(linksQuizz,quizzFinal);
     promise.then(guardaQuizz);
   }else{
-    return alert("dados inválidos"); 
+    return alert("Dados inválidos"); 
   }
   
 }
