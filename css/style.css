@@ -305,7 +305,7 @@ header .logo{
     flex-direction: column;
     width: 100%;
 }
-.quizz-questions .question{
+.quizz-questions .question, .quizz-result .result-box{
     padding: 30px 45px;
     width: 100%;
     max-width: 759px;
@@ -365,7 +365,43 @@ header .logo{
 .quizz-questions .answer:nth-child(2), .quizz-questions .answer:nth-child(4){
     margin-left: 2%;
 }
-
+.result-title {
+    background: #EC362D;
+    padding: 30px;
+    width: 100%;
+}
+.result-title h2{
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+}
+.result-info{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.result-info .col{
+    width: 50%;
+    max-width: 50%;
+    
+}
+.result-info .col img{
+    width: 100%;
+    height: auto;
+    
+}
+.result-info .col p{
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 25px;
+    color: #484848;
+    line-break: anywhere;
+    padding-left: 15px;
+}
 /* MOBILE */
 @media (max-width: 614px)
 {
