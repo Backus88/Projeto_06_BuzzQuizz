@@ -4,6 +4,8 @@ const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 let infoBasicasQuizz={};
 let arrayQuestions =[];
 let respostas = [];
+let quizAtivo;
+
 function validaInfoBasicas() {
     infoBasicasQuizz = {
       nome: document.getElementsByName('quizz-titulo')[0].value,
@@ -338,17 +340,57 @@ function respondePergunta(elemento, questao){
     id: questao,
     acerto: elemento.getAttribute("isCorrectAnswer")
   })
-  alert(document.getElementsByClassName("question").length +" - "+ respostas.length);
+  
 
   if(respostas.length === document.getElementsByClassName("question").length ){
-    alert("Finaliza quizz");
+    finalizaQuizz();
   }
 
 }
-function renderizaQuizz(resposta){
+function finalizaQuizz(){
 
-  let quizz = resposta.data;
+  /*calcula score*/
+  let acertos = 0;
 
+  for (let i = 0; i < respostas.length; i++) {
+    if(respostas[i].acerto === "true"){
+      acertos++;
+    }
+  }
+
+  
+  let score = ((acertos / respostas.length) * 100).toFixed(0);
+  score = Math.round(score);
+
+
+  /*seleceiona nivel*/
+
+  let levelSelecionado={};
+
+  quizAtivo.levels.sort(function(a, b) {
+      return a.minValue - b.minValue;
+  });
+
+  for (let i = 0; i < quizAtivo.levels.length; i++) {
+
+    if(quizAtivo.levels[i].minValue <= score){
+      levelSelecionado = quizAtivo.levels[i];
+    }
+  }
+  
+
+
+  
+  document.querySelector(".result-title h2").innerHTML = score +"% de acerto: "+ levelSelecionado.title;
+  document.querySelector(".result-info .col-img").innerHTML = `<img src="${levelSelecionado.image}">`;
+  document.querySelector(".result-info .col-info").innerHTML = `<p>${levelSelecionado.text}</p>`;
+
+  document.querySelector(".quizz-result").classList.remove("display-none");
+}
+function renderizaQuizz(respostaServer){
+
+  let quizz = respostaServer.data;
+  quizAtivo = quizz;
   
   document.querySelector(".quizz-head").style.background = `url("${quizz.image}")`;
   document.querySelector(".quizz-head h2").innerHTML = quizz.title;
