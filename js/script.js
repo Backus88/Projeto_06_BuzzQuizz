@@ -393,7 +393,7 @@ function finalizaQuizz(){
   document.querySelector(".result-info .col-img").innerHTML = `<img src="${levelSelecionado.image}">`;
   document.querySelector(".result-info .col-info").innerHTML = `<p>${levelSelecionado.text}</p>`;
   document.querySelector(".result-info").innerHTML += `
-      <div class="botoes-column botao-center">
+      <div class="botoes-column botao-center botoes-restart">
           <button class="btn" onclick="reiniciaQuizz()">
               Reinicia Quizz
           </button>
@@ -404,6 +404,12 @@ function finalizaQuizz(){
   `;
 
   document.querySelector(".quizz-result").classList.remove("display-none");
+
+  setTimeout(function(){
+
+    document.querySelector(".quizz-result").scrollIntoView({ behavior: 'smooth', block: 'start'});
+  },2000);
+  
 }
 function renderizaQuizz(respostaServer){
   mostraQuizzAtual = respostaServer;
@@ -464,9 +470,16 @@ function renderizaQuizz(respostaServer){
 //reinicia o quizz
 
 function reiniciaQuizz(){
+  respostas = [];
+
   console.log('reinicia o Quizz');
   renderizaQuizz(mostraQuizzAtual);
   document.querySelector(".quizz-game").scrollIntoView(true);
+
+  
+  document.querySelector(".botoes-restart").remove();
+
+  document.querySelector(".quizz-result").classList.add("display-none");
 }
 
 // muda para a tela criarquizz
