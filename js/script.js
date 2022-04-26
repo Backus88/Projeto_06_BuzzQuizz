@@ -302,10 +302,6 @@ function respondePergunta(elemento, questao){
     return false;
   }
 
-  
-
-  alert(elemento.getAttribute("isCorrectAnswer"));
-
   let respostas = document.getElementsByClassName("answer-question-"+ questao);
   
   
@@ -319,13 +315,21 @@ function respondePergunta(elemento, questao){
     respostas[i].classList.add("inactive");
   }
 
+
   elemento.classList.add("selected");
   elemento.classList.remove("inactive");
-  /*
-  if ( elemento.getAttribute("isCorrectAnswer") === "true"){
-    elemento.classList.remove("danger");
-    elemento.classList.add("success");
-  }*/
+
+  let nxt = document.getElementById("question-"+ (questao+1));
+
+  setTimeout(function(){
+
+    if( respostas.length > questao ){
+      nxt.scrollIntoView({ behavior: 'smooth', block: 'start'});
+    }
+    
+  },2000);
+  
+  
 
 }
 function renderizaQuizz(resposta){
@@ -342,7 +346,7 @@ function renderizaQuizz(resposta){
 
   for (let i = 0; i < quizz.questions.length; i++) {
     html += `
-      <div class="question">
+      <div class="question" id="question-${i}">
         <div class="question-title question-${i}" >
             <h2>${quizz.questions[i].title}</h2>
         </div>
@@ -353,7 +357,6 @@ function renderizaQuizz(resposta){
 
           for (let j = 0; j < answers.length; j++) {
 
-            
             html += `
               <div class="answer answer-question-${i}" onclick="respondePergunta(this, ${i})" isCorrectAnswer="${answers[j].isCorrectAnswer}">
                   <img src="${answers[j].image}" alt="">
@@ -361,8 +364,6 @@ function renderizaQuizz(resposta){
               </div>
               `;
           }
-
-
         html += `   
         </div>
       </div>
