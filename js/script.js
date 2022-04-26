@@ -183,7 +183,6 @@ function renderizaNiveis() {
   document.querySelector(".step-3").classList.remove("display-none");
 }
 
-
 //funções para validar os campos do nível
 const verificaTamanhoTitulo = titulo => titulo.length >= 10;
 const verificaPorcentagem = porcentagem => porcentagem >= 0 && porcentagem <= 100;
