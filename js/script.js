@@ -474,6 +474,7 @@ function renderizaQuizz(respostaServer){
 //reinicia o quizz
 
 function reiniciaQuizz(){
+  
   respostas = [];
 
   console.log('reinicia o Quizz');
@@ -484,6 +485,7 @@ function reiniciaQuizz(){
   document.querySelector(".botoes-restart").remove();
 
   document.querySelector(".quizz-result").classList.add("display-none");
+  toggleLoading();
 }
 
 // muda para a tela criarquizz
