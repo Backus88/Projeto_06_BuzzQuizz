@@ -322,7 +322,7 @@ header .logo{
     line-height: 27px;
     color: #fff;
     text-align: center;
-    line-break: anywhere;
+    
 }
 
 .quizz-questions .answers{
@@ -341,12 +341,14 @@ header .logo{
 }
 .quizz-questions .answer h2{
     line-height: 35px;
-}
-.quizz-questions .answer h2{
-    line-height: 35px;
+    font-size: 20px;
+    max-width: 100%;
+    line-break: anywhere;
+    width: 100%;
 }
 .quizz-questions .answer.success h2{
     color: #009C22;
+    
 }
 .quizz-questions .answer.danger h2{
     color: #FF4B4B;
@@ -376,5 +378,13 @@ header .logo{
     .quizz-game .quizz-head h2{
         font-size: 19px;
         line-height: 22px;
+    }
+    .quizz-questions .question-title h2{
+        font-size: 19px;
+        line-height: 23px;
+    }
+    .quizz-questions .answer h2{
+        line-height: 30px;
+        font-size: 13px;
     }
 }
