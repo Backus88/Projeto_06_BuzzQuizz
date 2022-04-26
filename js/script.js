@@ -304,9 +304,43 @@ function renderizaQuizz(resposta){
   document.querySelector(".quizz-head").style.background = `url("${quizz.image}")`;
   document.querySelector(".quizz-head h2").innerHTML = quizz.title;
 
-  for (let i = 0; i < quizz.questions.length; i++) {
-    
+  let questionsNode = document.querySelector(".quizz-questions");
+  questionsNode.innerHTML = ``;
+  let html = ``;
 
+  for (let i = 0; i < quizz.questions.length; i++) {
+    html += `
+      <div class="question">
+        <div class="question-title question-${i}" >
+            <h2>${quizz.questions[i].title}</h2>
+        </div>
+        <div class="answers">`;
+        
+          for (let j = 0; j < quizz.questions[i].answers.length; j++) {
+
+            
+            html += `
+              <div class="answer">
+                  <img src="${quizz.questions[i].answers[j].image}" alt="">
+                  <h2>${quizz.questions[i].answers[j].text}</h2>
+              </div>
+              `;
+          }
+
+
+        html += `   
+        </div>
+      </div>
+    `;
+  }
+
+  questionsNode.innerHTML = html;
+
+  for (let i = 0; i < quizz.questions.length; i++) {
+
+    let questionNode = document.querySelector(".question-"+ i);
+
+    questionNode.style.background = quizz.questions[i].color ;
   }
 
 
