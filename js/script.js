@@ -3,6 +3,8 @@ const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 
 let infoBasicasQuizz={};
 let arrayQuestions =[];
+let mostraQuizzFinal =[];
+
 let respostas = [];
 let quizAtivo;
 
@@ -217,6 +219,7 @@ const guardaQuizz = resposta =>{
   localStorage.setItem(`id${localStorage.length+1}`, resposta.data.id);
   document.querySelector(".step-3").classList.add("display-none");
   document.querySelector(".step-4").classList.remove("display-none");
+  mostraQuizzFinal = resposta;
 }
 const erroCriacao = erro =>{
   console.log(erro.response.status);
@@ -288,6 +291,11 @@ function validaNivel() {
 function voltaHome(){
   console.log('volta para home');
   window.location.reload();
+}
+
+function acessaQuizz(){
+  document.querySelector(".step-4").classList.add("display-none");
+  renderizaQuizz(mostraQuizzFinal);
 }
 
 function mostraQuizz(id){
@@ -434,9 +442,13 @@ function renderizaQuizz(respostaServer){
     questionNode.style.background = quizz.questions[i].color ;
   }
 
-
-  document.querySelector(".tela1").classList.add("display-none");
-  document.querySelector(".quizz-game").classList.remove("display-none");
+  if(!document.querySelector(".tela1").classList.contains("display-none")){
+    document.querySelector(".tela1").classList.add("display-none");
+  }
+  if(document.querySelector(".quizz-game").classList.contains("display-none")){
+    document.querySelector(".quizz-game").classList.remove("display-none");
+  }
+  
 }
 // muda para a tela criarquizz
 function vaiCriarQuizz(){
