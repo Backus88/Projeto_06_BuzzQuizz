@@ -402,6 +402,13 @@ header .logo{
     line-break: anywhere;
     padding-left: 15px;
 }
+
+.botao-center{
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
 /* MOBILE */
 @media (max-width: 614px)
 {

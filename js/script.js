@@ -4,6 +4,7 @@ const linksQuizz = "https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes";
 let infoBasicasQuizz={};
 let arrayQuestions =[];
 let mostraQuizzFinal =[];
+let mostraQuizzAtual =[];
 
 let respostas = [];
 let quizAtivo;
@@ -391,11 +392,21 @@ function finalizaQuizz(){
   document.querySelector(".result-title h2").innerHTML = score +"% de acerto: "+ levelSelecionado.title;
   document.querySelector(".result-info .col-img").innerHTML = `<img src="${levelSelecionado.image}">`;
   document.querySelector(".result-info .col-info").innerHTML = `<p>${levelSelecionado.text}</p>`;
+  document.querySelector(".result-info").innerHTML += `
+      <div class="botoes-column botao-center">
+          <button class="btn" onclick="reiniciaQuizz()">
+              Reinicia Quizz
+          </button>
+          <button class="btn btn-borderless" onclick="voltaHome()">
+              Volta pra home
+          </button>
+      </div>
+  `;
 
   document.querySelector(".quizz-result").classList.remove("display-none");
 }
 function renderizaQuizz(respostaServer){
-
+  mostraQuizzAtual = respostaServer;
   let quizz = respostaServer.data;
   quizAtivo = quizz;
   
@@ -449,6 +460,15 @@ function renderizaQuizz(respostaServer){
   }
   
 }
+
+//reinicia o quizz
+
+function reiniciaQuizz(){
+  console.log('reinicia o Quizz');
+  renderizaQuizz(mostraQuizzAtual);
+  document.querySelector(".quizz-game").scrollIntoView(true);
+}
+
 // muda para a tela criarquizz
 function vaiCriarQuizz(){
   document.querySelector(".tela1").classList.add("display-none");
