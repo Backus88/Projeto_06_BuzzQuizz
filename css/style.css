@@ -433,4 +433,9 @@ header .logo{
         line-height: 30px;
         font-size: 13px;
     }
+    .result-info .col {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 15px;
+    }
 }
