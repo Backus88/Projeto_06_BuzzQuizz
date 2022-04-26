@@ -5,6 +5,7 @@ let infoBasicasQuizz={};
 let arrayQuestions =[];
 let mostraQuizzFinal =[];
 
+let respostas = [];
 function validaInfoBasicas() {
     infoBasicasQuizz = {
       nome: document.getElementsByName('quizz-titulo')[0].value,
@@ -309,34 +310,47 @@ function respondePergunta(elemento, questao){
     return false;
   }
 
-  let respostas = document.getElementsByClassName("answer-question-"+ questao);
+  let respostasNode = document.getElementsByClassName("answer-question-"+ questao);
   
   
-  for (let i = 0; i < respostas.length; i++) {
+  for (let i = 0; i < respostasNode.length; i++) {
     
-    if(respostas[i].getAttribute("isCorrectAnswer") === "true"  ){
-      respostas[i].classList.add("success");
+    if(respostasNode[i].getAttribute("isCorrectAnswer") === "true"  ){
+      respostasNode[i].classList.add("success");
     }else{
-      respostas[i].classList.add("danger");
+      respostasNode[i].classList.add("danger");
     }
-    respostas[i].classList.add("inactive");
+    respostasNode[i].classList.add("inactive");
   }
 
 
   elemento.classList.add("selected");
   elemento.classList.remove("inactive");
 
-  let nxt = document.getElementById("question-"+ (questao+1));
+  let nxt = document.querySelector("#question-"+ (questao+1));
+  
 
-  setTimeout(function(){
-
-    if( respostas.length > questao ){
-      nxt.scrollIntoView({ behavior: 'smooth', block: 'start'});
-    }
+  if(  document.getElementsByClassName("question").length > questao+1 ){
     
-  },2000);
+    setTimeout(function(){
+
+      nxt.scrollIntoView({ behavior: 'smooth', block: 'start'});
+    },2000);
+  }else{
+    nxt = document.querySelector("#question-"+ questao);
+  }
   
-  
+  nxt.classList.add("respondida");
+
+  respostas.push({
+    id: questao,
+    acerto: elemento.getAttribute("isCorrectAnswer")
+  })
+  alert(document.getElementsByClassName("question").length +" - "+ respostas.length);
+
+  if(respostas.length === document.getElementsByClassName("question").length ){
+    alert("Finaliza quizz");
+  }
 
 }
 function renderizaQuizz(resposta){
