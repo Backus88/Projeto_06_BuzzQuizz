@@ -220,6 +220,7 @@ const guardaQuizz = resposta =>{
   document.querySelector(".step-3").classList.add("display-none");
   document.querySelector(".step-4").classList.remove("display-none");
   mostraQuizzFinal = resposta;
+  toggleLoading();
 }
 const erroCriacao = erro =>{
   console.log(erro.response.status);
@@ -271,6 +272,7 @@ function validaNivel() {
       levels: arrayNiveis
     }
     console.log(quizzFinal);
+    toggleLoading();
     let promise = axios.post(linksQuizz,quizzFinal);
     promise.then(guardaQuizz);
   }else{
@@ -300,10 +302,12 @@ function acessaQuizz(){
 
 function mostraQuizz(id){
 
-
+  toggleLoading();
 
   promise = axios.get(linksQuizz +'/'+id );
   promise.then(renderizaQuizz);
+
+  
 }
 
 function respondePergunta(elemento, questao){
@@ -464,7 +468,7 @@ function renderizaQuizz(respostaServer){
   if(document.querySelector(".quizz-game").classList.contains("display-none")){
     document.querySelector(".quizz-game").classList.remove("display-none");
   }
-  
+  toggleLoading();
 }
 
 //reinicia o quizz
@@ -565,6 +569,15 @@ function renderizaQuizzes(resposta){
     `;
     }
   }
+
+  toggleLoading();
+}
+function toggleLoading(){
+  
+
+  document.querySelector(".loading").classList.toggle("hide");
+  
+  
 }
 function comparador() { 
 	return Math.random() - 0.5; 
