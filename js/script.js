@@ -315,14 +315,17 @@ function renderizaQuizz(resposta){
             <h2>${quizz.questions[i].title}</h2>
         </div>
         <div class="answers">`;
-        
-          for (let j = 0; j < quizz.questions[i].answers.length; j++) {
+
+          let answers = quizz.questions[i].answers;
+          answers = answers.sort( comparador );
+
+          for (let j = 0; j < answers.length; j++) {
 
             
             html += `
               <div class="answer">
-                  <img src="${quizz.questions[i].answers[j].image}" alt="">
-                  <h2>${quizz.questions[i].answers[j].text}</h2>
+                  <img src="${answers[j].image}" alt="">
+                  <h2>${answers[j].text}</h2>
               </div>
               `;
           }
@@ -430,6 +433,9 @@ function renderizaQuizzes(resposta){
     `;
     }
   }
+}
+function comparador() { 
+	return Math.random() - 0.5; 
 }
 
 //inicializa o site
