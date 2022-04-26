@@ -404,6 +404,12 @@ function finalizaQuizz(){
   `;
 
   document.querySelector(".quizz-result").classList.remove("display-none");
+  
+  setTimeout(function(){
+
+    document.querySelector(".quizz-result").scrollIntoView({ behavior: 'smooth', block: 'start'});
+  },2000);
+  
 }
 function renderizaQuizz(respostaServer){
   mostraQuizzAtual = respostaServer;
