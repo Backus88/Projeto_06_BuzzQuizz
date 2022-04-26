@@ -296,6 +296,39 @@ function mostraQuizz(id){
   promise = axios.get(linksQuizz +'/'+id );
   promise.then(renderizaQuizz);
 }
+
+function respondePergunta(elemento, questao){
+
+  if(elemento.classList.contains("success") || elemento.classList.contains("danger")){
+    return false;
+  }
+
+  
+
+  alert(elemento.getAttribute("isCorrectAnswer"));
+
+  let respostas = document.getElementsByClassName("answer-question-"+ questao);
+  
+  
+  for (let i = 0; i < respostas.length; i++) {
+    
+    if(respostas[i].getAttribute("isCorrectAnswer") === "true"  ){
+      respostas[i].classList.add("success");
+    }else{
+      respostas[i].classList.add("danger");
+    }
+    respostas[i].classList.add("inactive");
+  }
+
+  elemento.classList.add("selected");
+  elemento.classList.remove("inactive");
+  /*
+  if ( elemento.getAttribute("isCorrectAnswer") === "true"){
+    elemento.classList.remove("danger");
+    elemento.classList.add("success");
+  }*/
+
+}
 function renderizaQuizz(resposta){
 
   let quizz = resposta.data;
@@ -323,7 +356,7 @@ function renderizaQuizz(resposta){
 
             
             html += `
-              <div class="answer">
+              <div class="answer answer-question-${i}" onclick="respondePergunta(this, ${i})" isCorrectAnswer="${answers[j].isCorrectAnswer}">
                   <img src="${answers[j].image}" alt="">
                   <h2>${answers[j].text}</h2>
               </div>
