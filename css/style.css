@@ -97,14 +97,23 @@ header .logo{
 }
 .step-1 .creation-body{
     background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 /* PERGUNTAS */
+.perguntas-body {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
 .perguntas-body .inputs{
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0px;
+    transition: all 600ms ease;
 }
 .perguntas-body.active .inputs{
-     display: block;
-
+    visibility: visible;
+    opacity: 1;
+    transition: all 600ms ease;
+    max-height: none;
 }
 
 /* CRIAÇÃO DOS NÍVEIS */
